@@ -1,5 +1,7 @@
 import express from 'express';
 
+import './database/connection';
+
 const app  = express();
 
 //Rota = conjunto
@@ -17,3 +19,8 @@ app.get('/users', (request,response) =>{
 });
 
 app.listen(3333);
+
+
+// Driver nativo, query builder, ORM
+// Object Relational Maping
+
