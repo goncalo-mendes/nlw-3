@@ -3,7 +3,7 @@ import express from 'express';
 import './database/connection';
 
 const app  = express();
-
+app.use(express.json());
 //Rota = conjunto
 //Recurso = usarios
 //Metodos HTTP = GET,POST,PUT,DELETE
