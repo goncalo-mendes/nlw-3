@@ -1,5 +1,6 @@
 import express from 'express';
-
+import { getRepository } from 'typeorm'
+import Orphanage from './models/Orphanage';
 import './database/connection';
 
 const app  = express();
@@ -14,8 +15,32 @@ app.use(express.json());
 //PUT = editando a informação
 //DELETE = deleter uma informação
 
-app.get('/users', (request,response) =>{
-    return response.json({ message: 'hello world' });
+app.post('/orphanages', async (request,response) =>{
+    const{
+        name,
+        latitude,
+        longitude,
+        about,
+        instructions,
+        opening_hours,
+        open_on_weekends,
+    } = request.body;
+
+    const orphanegesRepository = getRepository(Orphanage);
+
+    const orphanage = orphanegesRepository.create({
+        name,
+        latitude,
+        longitude,
+        about,
+        instructions,
+        opening_hours,
+        open_on_weekends,
+    });
+
+    await orphanegesRepository.save(orphanage);
+
+    return response.json({ messsage: 'hello'});
 });
 
 app.listen(3333);
